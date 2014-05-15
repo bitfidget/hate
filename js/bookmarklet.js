@@ -1,0 +1,1 @@
+javascript:var%20i,s,ss=['//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js','http://modelcitizen.com.au/GOD/js/god.js'];for(i=0;i!=ss.length;i++){s=document.createElement('script');s.src=ss[i];document.getElementsByTagName('head')[0].appendChild(s);}void(0);
