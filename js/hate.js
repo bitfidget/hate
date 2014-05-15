@@ -1,3 +1,21 @@
+
+(function ( $ ) {
+ 
+  $.fn.makeItRain = function () {
+    
+    var letters = this.text().split('');
+
+    $.each(letters, function ( index, value ) {
+      //$winBody.prepend('<div class="clusterFuck">' + value + '</div>');
+    });
+    
+  };
+ 
+}( jQuery ));
+
+
+
+
 var getRevenge = {
   initialize : function () {
     // inject css
@@ -7,60 +25,49 @@ var getRevenge = {
     winHeight = $(window).height();
     $winBody = $('body');
 
-
     $winBody.find('script').remove();
     $winBody.find('noscript').remove();
-    $objectOfhate = $winBody.children().last()
+    $objectOfHate = $winBody.children().last()
     this.killThemAll();
   },
-  killDivs : function () {
-    var kill = $winBody.children().last();
-    if (kill.children().length > 0){
-      kill = kill.children().last();
-    } else {
-      kill.fadeOut(500, function () {
-        getRevenge.killDivs();
-      });
-    }
-  },
-  killElems : function () {
-    
-    $objectOfhate.focus();
-
-    $objectOfhate.is("div,ul,ol")
-
-
-
-    if ($objectOfhate.children().length > 1){
-      $objectOfhate = $objectOfhate.children().last();
-      getRevenge.killElems();
-    } else {
-      
-      $objectOfhate.fadeOut(500, function () {
-        $objectOfhate.remove();
-        $objectOfhate = $winBody.children().last()
-        getRevenge.killElems();
-      });
-    }
-  },
   killThemAll : function () {
-    $objectOfhate.focus();
+    $objectOfHate.focus();
 
-    if ( ( $objectOfhate.is("div,ul,ol,section,article") === true ) && ( $objectOfhate.children().length > 0 ) ) {
-      $objectOfhate = $objectOfhate.children().last();
+    if ( ( $objectOfHate.is("div,ul,ol,section,article") === true ) && ( $objectOfHate.children().length > 0 ) ) {
+      $objectOfHate = $objectOfHate.children().last();
       getRevenge.killThemAll();
     } else {
-      $objectOfhate.fadeOut(500, function () {
-        $objectOfhate.remove();
-        $objectOfhate = $winBody.children().last()
-        getRevenge.killThemAll();
-      });
-    }
 
+      // make all the letters explode
+      $($objectOfHate).makeItRain();
+
+      // make the div look explodey
+      $objectOfHate.addClass('explodeStart');
+      setTimeout(function () {
+        $objectOfHate.addClass('explodeBoom');
+        setTimeout(function () {
+          $objectOfHate.addClass('explodeEnd');
+          setTimeout(function () {
+            $objectOfHate.fadeOut(300, function () {
+              $objectOfHate.remove();
+              $objectOfHate = $winBody.children().last()
+              getRevenge.killThemAll();
+            });
+          }, 200);
+        }, 200);
+      }, 200);
+
+      
+      // $objectOfHate.fadeOut(500, function () {
+      //   $objectOfHate.remove();
+      //   $objectOfHate = $winBody.children().last()
+      //   getRevenge.killThemAll();
+      // });
+    }
   }
 };
 
-var winWidth, winHeight, $winBody, $objectOfhate;
+var winWidth, winHeight, $winBody, $objectOfHate;
 var hateHost = 'http://modelcitizen.com.au/hate/';
 
 $(document).ready(function(){
